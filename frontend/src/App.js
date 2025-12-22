@@ -8,6 +8,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import CoursePage from './pages/CoursePage';
 import CoursesPage from './pages/CoursesPage';
 import CareerPage from './pages/CareerPage';
+import ResourcesPage from './pages/ResourcesPage';
 import ParentDashboard from './pages/ParentDashboard';
 import { Toaster } from './components/ui/sonner';
 import './App.css';
