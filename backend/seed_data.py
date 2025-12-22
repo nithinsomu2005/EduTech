@@ -14,7 +14,7 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 async def seed_data():
-    print("🌱 Seeding database...")
+    print("🌱 Seeding database with comprehensive educational content...")
     
     await db.courses.delete_many({})
     await db.quizzes.delete_many({})
@@ -22,17 +22,18 @@ async def seed_data():
     await db.career_roadmaps.delete_many({})
     await db.resources.delete_many({})
     
-    print("📚 Creating courses...")
+    print("📚 Creating 15+ courses with real YouTube videos...")
     courses = [
+        # KG Courses
         {
             "course_id": str(uuid.uuid4()),
-            "title": "Introduction to Shapes and Colors",
+            "title": "Learn Colors and Shapes",
             "grade_level": "KG",
             "subject": "Mathematics",
             "video_url": "https://www.youtube.com/watch?v=skvA00Ush88",
-            "duration_minutes": 5,
+            "duration_minutes": 10,
             "credits": 50,
-            "description": "Learn basic shapes and colors through fun animations",
+            "description": "Fun introduction to basic shapes and colors for kindergarten",
             "thumbnail": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400",
             "order": 1,
             "created_by": "admin",
@@ -40,13 +41,29 @@ async def seed_data():
         },
         {
             "course_id": str(uuid.uuid4()),
+            "title": "ABC Phonics Song",
+            "grade_level": "KG",
+            "subject": "English",
+            "video_url": "https://www.youtube.com/watch?v=BELlZKpi1Zs",
+            "duration_minutes": 8,
+            "credits": 50,
+            "description": "Learn the alphabet with fun phonics songs",
+            "thumbnail": "https://images.unsplash.com/photo-1516534775068-ba3e7458af70?w=400",
+            "order": 2,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        
+        # Grade 6-10 Courses
+        {
+            "course_id": str(uuid.uuid4()),
             "title": "Photosynthesis - How Plants Make Food",
             "grade_level": "6-10",
             "subject": "Science",
             "video_url": "https://www.youtube.com/watch?v=UPBMG5EYydo",
-            "duration_minutes": 10,
+            "duration_minutes": 12,
             "credits": 100,
-            "description": "Understanding the process of photosynthesis in plants",
+            "description": "Detailed explanation of photosynthesis process in plants",
             "thumbnail": "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400",
             "order": 1,
             "created_by": "admin",
@@ -54,13 +71,57 @@ async def seed_data():
         },
         {
             "course_id": str(uuid.uuid4()),
+            "title": "Fractions Made Easy",
+            "grade_level": "6-10",
+            "subject": "Mathematics",
+            "video_url": "https://www.youtube.com/watch?v=uDfiyH-40bE",
+            "duration_minutes": 15,
+            "credits": 100,
+            "description": "Understanding fractions, decimals, and percentages",
+            "thumbnail": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400",
+            "order": 2,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "course_id": str(uuid.uuid4()),
+            "title": "The Water Cycle",
+            "grade_level": "6-10",
+            "subject": "Science",
+            "video_url": "https://www.youtube.com/watch?v=al-do-HGuIk",
+            "duration_minutes": 10,
+            "credits": 100,
+            "description": "Learn about evaporation, condensation, and precipitation",
+            "thumbnail": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400",
+            "order": 3,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "course_id": str(uuid.uuid4()),
+            "title": "Parts of Speech - Grammar Basics",
+            "grade_level": "6-10",
+            "subject": "English",
+            "video_url": "https://www.youtube.com/watch?v=5ox9ZgdoPYI",
+            "duration_minutes": 12,
+            "credits": 100,
+            "description": "Learn nouns, verbs, adjectives, and more",
+            "thumbnail": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400",
+            "order": 4,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        
+        # Inter (11-12) Courses
+        {
+            "course_id": str(uuid.uuid4()),
             "title": "Newton's Laws of Motion",
             "grade_level": "Inter",
             "subject": "Physics",
             "video_url": "https://www.youtube.com/watch?v=kKKM8Y-u7ds",
-            "duration_minutes": 15,
+            "duration_minutes": 18,
             "credits": 150,
-            "description": "Deep dive into Newton's three laws of motion",
+            "description": "Complete explanation of Newton's three laws with examples",
             "thumbnail": "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=400",
             "order": 1,
             "created_by": "admin",
@@ -68,13 +129,57 @@ async def seed_data():
         },
         {
             "course_id": str(uuid.uuid4()),
+            "title": "Organic Chemistry Basics",
+            "grade_level": "Inter",
+            "subject": "Chemistry",
+            "video_url": "https://www.youtube.com/watch?v=cRCxdBV8YKQ",
+            "duration_minutes": 20,
+            "credits": 150,
+            "description": "Introduction to organic compounds and functional groups",
+            "thumbnail": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=400",
+            "order": 2,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "course_id": str(uuid.uuid4()),
+            "title": "Calculus - Derivatives",
+            "grade_level": "Inter",
+            "subject": "Mathematics",
+            "video_url": "https://www.youtube.com/watch?v=9vKqVkMQHKk",
+            "duration_minutes": 22,
+            "credits": 150,
+            "description": "Understanding derivatives and differentiation",
+            "thumbnail": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=400",
+            "order": 3,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "course_id": str(uuid.uuid4()),
+            "title": "Cell Biology and DNA",
+            "grade_level": "Inter",
+            "subject": "Biology",
+            "video_url": "https://www.youtube.com/watch?v=8IlzKri08kk",
+            "duration_minutes": 16,
+            "credits": 150,
+            "description": "Understanding cell structure and DNA replication",
+            "thumbnail": "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=400",
+            "order": 4,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        
+        # BTech Courses
+        {
+            "course_id": str(uuid.uuid4()),
             "title": "Data Structures: Arrays and Linked Lists",
             "grade_level": "BTech",
             "subject": "Computer Science",
             "video_url": "https://www.youtube.com/watch?v=Hj_rA0dhr2I",
-            "duration_minutes": 20,
+            "duration_minutes": 25,
             "credits": 200,
-            "description": "Understanding fundamental data structures",
+            "description": "Complete guide to arrays, linked lists, and their operations",
             "thumbnail": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400",
             "order": 1,
             "created_by": "admin",
@@ -86,11 +191,67 @@ async def seed_data():
             "grade_level": "BTech",
             "subject": "Computer Science",
             "video_url": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-            "duration_minutes": 25,
+            "duration_minutes": 30,
             "credits": 200,
-            "description": "Learn HTML, CSS and JavaScript basics",
+            "description": "Learn HTML, CSS, and JavaScript fundamentals",
             "thumbnail": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400",
             "order": 2,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "course_id": str(uuid.uuid4()),
+            "title": "Database Management Systems",
+            "grade_level": "BTech",
+            "subject": "Computer Science",
+            "video_url": "https://www.youtube.com/watch?v=c5HAwKX-suM",
+            "duration_minutes": 28,
+            "credits": 200,
+            "description": "SQL queries, normalization, and database design",
+            "thumbnail": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=400",
+            "order": 3,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "course_id": str(uuid.uuid4()),
+            "title": "Operating Systems Fundamentals",
+            "grade_level": "BTech",
+            "subject": "Computer Science",
+            "video_url": "https://www.youtube.com/watch?v=mXw9ruZaxzQ",
+            "duration_minutes": 26,
+            "credits": 200,
+            "description": "Process management, memory management, and scheduling",
+            "thumbnail": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400",
+            "order": 4,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "course_id": str(uuid.uuid4()),
+            "title": "Computer Networks Basics",
+            "grade_level": "BTech",
+            "subject": "Computer Science",
+            "video_url": "https://www.youtube.com/watch?v=0uSSx9LzL3U",
+            "duration_minutes": 24,
+            "credits": 200,
+            "description": "OSI model, TCP/IP, and network protocols",
+            "thumbnail": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400",
+            "order": 5,
+            "created_by": "admin",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "course_id": str(uuid.uuid4()),
+            "title": "Python Programming for Beginners",
+            "grade_level": "BTech",
+            "subject": "Computer Science",
+            "video_url": "https://www.youtube.com/watch?v=rfscVS0vtbw",
+            "duration_minutes": 35,
+            "credits": 200,
+            "description": "Complete Python tutorial from basics to advanced",
+            "thumbnail": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400",
+            "order": 6,
             "created_by": "admin",
             "created_at": datetime.utcnow().isoformat()
         }
@@ -103,7 +264,7 @@ async def seed_data():
     quizzes = [
         {
             "quiz_id": str(uuid.uuid4()),
-            "course_id": courses[1]["course_id"],
+            "course_id": courses[2]["course_id"],
             "title": "Photosynthesis Quiz",
             "questions": [
                 {
@@ -131,7 +292,7 @@ async def seed_data():
         },
         {
             "quiz_id": str(uuid.uuid4()),
-            "course_id": courses[3]["course_id"],
+            "course_id": courses[9]["course_id"],
             "title": "Data Structures Quiz",
             "questions": [
                 {
@@ -210,7 +371,7 @@ async def seed_data():
             "title": "Full Stack Developer",
             "skills": ["HTML/CSS", "JavaScript", "React", "Node.js", "MongoDB", "Git"],
             "milestones": [
-                {"title": "Frontend Basics", "duration": "2 months", "resources": ["https://www.freecodecamp.org"]},
+                {"title": "Frontend Basics", "duration": "2 months", "resources": ["https://www.freecodecamp.org", "https://www.w3schools.com"]},
                 {"title": "Backend Development", "duration": "2 months", "resources": ["https://nodejs.org/en/docs/"]},
                 {"title": "Full Stack Projects", "duration": "2 months", "resources": ["https://github.com/topics/full-stack"]}
             ],
@@ -246,8 +407,9 @@ async def seed_data():
     await db.career_roadmaps.insert_many(roadmaps)
     print(f"✅ Created {len(roadmaps)} career roadmaps")
     
-    print("📖 Creating resources...")
+    print("📖 Creating NCERT textbooks and resources...")
     resources = [
+        # NCERT Textbooks
         {
             "resource_id": str(uuid.uuid4()),
             "grade_level": "6-10",
@@ -257,6 +419,61 @@ async def seed_data():
             "url": "https://ncert.nic.in/textbook.php?jesc1=0-11",
             "thumbnail": "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400",
             "description": "Official NCERT Science textbook for Class 10",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "resource_id": str(uuid.uuid4()),
+            "grade_level": "6-10",
+            "type": "textbook",
+            "title": "NCERT Mathematics Class 10",
+            "subject": "Mathematics",
+            "url": "https://ncert.nic.in/textbook.php?jemh1=0-13",
+            "thumbnail": "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?w=400",
+            "description": "Official NCERT Mathematics textbook for Class 10",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "resource_id": str(uuid.uuid4()),
+            "grade_level": "6-10",
+            "type": "textbook",
+            "title": "NCERT Social Science Class 10",
+            "subject": "Social Science",
+            "url": "https://ncert.nic.in/textbook.php?jess1=0-13",
+            "thumbnail": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400",
+            "description": "Official NCERT Social Science textbook for Class 10",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "resource_id": str(uuid.uuid4()),
+            "grade_level": "Inter",
+            "type": "textbook",
+            "title": "NCERT Physics Class 12",
+            "subject": "Physics",
+            "url": "https://ncert.nic.in/textbook.php?leph1=0-15",
+            "thumbnail": "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=400",
+            "description": "Official NCERT Physics textbook for Class 12",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "resource_id": str(uuid.uuid4()),
+            "grade_level": "Inter",
+            "type": "textbook",
+            "title": "NCERT Chemistry Class 12",
+            "subject": "Chemistry",
+            "url": "https://ncert.nic.in/textbook.php?lech1=0-16",
+            "thumbnail": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=400",
+            "description": "Official NCERT Chemistry textbook for Class 12",
+            "created_at": datetime.utcnow().isoformat()
+        },
+        {
+            "resource_id": str(uuid.uuid4()),
+            "grade_level": "Inter",
+            "type": "textbook",
+            "title": "NCERT Mathematics Class 12",
+            "subject": "Mathematics",
+            "url": "https://ncert.nic.in/textbook.php?lemh1=0-13",
+            "thumbnail": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400",
+            "description": "Official NCERT Mathematics textbook for Class 12",
             "created_at": datetime.utcnow().isoformat()
         },
         {
@@ -287,7 +504,12 @@ async def seed_data():
     await db.resources.insert_many(resources)
     print(f"✅ Created {len(resources)} resources")
     
-    print("🎉 Database seeded successfully!")
+    print("\n🎉 Database seeded successfully!")
+    print(f"   📚 {len(courses)} courses")
+    print(f"   📝 {len(quizzes)} quizzes")
+    print(f"   🏆 {len(badges)} badges")
+    print(f"   💼 {len(roadmaps)} career roadmaps")
+    print(f"   📖 {len(resources)} NCERT books & resources")
     client.close()
 
 if __name__ == "__main__":
