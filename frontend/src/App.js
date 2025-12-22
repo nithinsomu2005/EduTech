@@ -89,6 +89,15 @@ function App() {
             />
             
             <Route
+              path="/teacher/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['teacher']}>
+                  <TeacherDashboard />
+                </ProtectedRoute>
+              }
+            />
+            
+            <Route
               path="/parent/dashboard"
               element={
                 <ProtectedRoute allowedRoles={['parent']}>
