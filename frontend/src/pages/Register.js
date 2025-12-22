@@ -194,6 +194,40 @@ const Register = () => {
               </Select>
             </div>
 
+            {formData.role === 'student' && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="grade">Grade/Standard</Label>
+                  <Select value={formData.grade} onValueChange={(value) => handleChange('grade', value)}>
+                    <SelectTrigger data-testid="grade-select">
+                      <SelectValue placeholder="Select your grade" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {gradeOptions.map(opt => (
+                        <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {(formData.grade === 'Inter' || formData.grade === 'BTech') && (
+                  <div className="space-y-2">
+                    <Label htmlFor="stream">Stream/Branch</Label>
+                    <Select value={formData.stream} onValueChange={(value) => handleChange('stream', value)}>
+                      <SelectTrigger data-testid="stream-select">
+                        <SelectValue placeholder="Select stream" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {streamOptions[formData.grade]?.map(stream => (
+                          <SelectItem key={stream} value={stream}>{stream}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+              </div>
+            )}
+
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
