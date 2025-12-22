@@ -50,7 +50,7 @@ const Register = () => {
       await register(dataToSend);
       setSuccess(true);
       setTimeout(() => {
-        navigate('/login');
+        navigate('/login', { state: { institution_id: formData.institution_id } });
       }, 2000);
     } catch (err) {
       setError(err.response?.data?.detail || 'Registration failed. Please try again.');
