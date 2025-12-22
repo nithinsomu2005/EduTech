@@ -1,1 +1,98 @@
-import React from 'react';\nimport { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';\nimport { AuthProvider, useAuth } from './context/AuthContext';\nimport Landing from './pages/Landing';\nimport Login from './pages/Login';\nimport Register from './pages/Register';\nimport StudentDashboard from './pages/StudentDashboard';\nimport CoursePage from './pages/CoursePage';\nimport CoursesPage from './pages/CoursesPage';\nimport CareerPage from './pages/CareerPage';\nimport ParentDashboard from './pages/ParentDashboard';\nimport { Toaster } from './components/ui/sonner';\nimport './App.css';\n\nconst ProtectedRoute = ({ children, allowedRoles }) => {\n  const { user, loading } = useAuth();\n\n  if (loading) {\n    return (\n      <div className=\"min-h-screen flex items-center justify-center\">\n        <div className=\"animate-spin rounded-full h-12 w-12 border-b-2 border-[hsl(var(--primary))]\"></div>\n      </div>\n    );\n  }\n\n  if (!user) {\n    return <Navigate to=\"/login\" />;\n  }\n\n  if (allowedRoles && !allowedRoles.includes(user.role)) {\n    return <Navigate to=\"/\" />;\n  }\n\n  return children;\n};\n\nfunction App() {\n  return (\n    <AuthProvider>\n      <BrowserRouter>\n        <div className=\"App\">\n          <Routes>\n            <Route path=\"/\" element={<Landing />} />\n            <Route path=\"/login\" element={<Login />} />\n            <Route path=\"/register\" element={<Register />} />\n            \n            <Route\n              path=\"/student/dashboard\"\n              element={\n                <ProtectedRoute allowedRoles={['student']}>\n                  <StudentDashboard />\n                </ProtectedRoute>\n              }\n            />\n            <Route\n              path=\"/student/courses\"\n              element={\n                <ProtectedRoute allowedRoles={['student']}>\n                  <CoursesPage />\n                </ProtectedRoute>\n              }\n            />\n            <Route\n              path=\"/student/course/:courseId\"\n              element={\n                <ProtectedRoute allowedRoles={['student']}>\n                  <CoursePage />\n                </ProtectedRoute>\n              }\n            />\n            <Route\n              path=\"/student/career\"\n              element={\n                <ProtectedRoute allowedRoles={['student']}>\n                  <CareerPage />\n                </ProtectedRoute>\n              }\n            />\n            \n            <Route\n              path=\"/parent/dashboard\"\n              element={\n                <ProtectedRoute allowedRoles={['parent']}>\n                  <ParentDashboard />\n                </ProtectedRoute>\n              }\n            />\n            \n            <Route path=\"*\" element={<Navigate to=\"/\" />} />\n          </Routes>\n          <Toaster />\n        </div>\n      </BrowserRouter>\n    </AuthProvider>\n  );\n}\n\nexport default App;\n
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import Landing from './pages/Landing';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import StudentDashboard from './pages/StudentDashboard';
+import CoursePage from './pages/CoursePage';
+import CoursesPage from './pages/CoursesPage';
+import CareerPage from './pages/CareerPage';
+import ParentDashboard from './pages/ParentDashboard';
+import { Toaster } from './components/ui/sonner';
+import './App.css';
+
+const ProtectedRoute = ({ children, allowedRoles }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
+};
+
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            
+            <Route
+              path="/student/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['student']}>
+                  <StudentDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/student/courses"
+              element={
+                <ProtectedRoute allowedRoles={['student']}>
+                  <CoursesPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/student/course/:courseId"
+              element={
+                <ProtectedRoute allowedRoles={['student']}>
+                  <CoursePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/student/career"
+              element={
+                <ProtectedRoute allowedRoles={['student']}>
+                  <CareerPage />
+                </ProtectedRoute>
+              }
+            />
+            
+            <Route
+              path="/parent/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['parent']}>
+                  <ParentDashboard />
+                </ProtectedRoute>
+              }
+            />
+            
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+          <Toaster />
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
+
+export default App;\n
