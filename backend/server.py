@@ -23,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from routers import auth, courses, progress, rewards, career, parent, resources, leaderboard
+from routers import auth, courses, progress, rewards, career, parent, resources, leaderboard, teacher
 
 app.include_router(auth.router, prefix="/api")
 app.include_router(courses.router, prefix="/api")
@@ -31,6 +31,7 @@ app.include_router(progress.router, prefix="/api")
 app.include_router(rewards.router, prefix="/api")
 app.include_router(career.router, prefix="/api")
 app.include_router(parent.router, prefix="/api")
+app.include_router(teacher.router, prefix="/api")
 app.include_router(resources.router, prefix="/api")
 app.include_router(leaderboard.router, prefix="/api")
 
