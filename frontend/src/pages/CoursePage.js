@@ -162,11 +162,14 @@ const CoursePage = () => {
             </div>
 
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-6">
-              <div className="aspect-video bg-black flex items-center justify-center">
+              <div className="aspect-video bg-black">
                 <iframe
                   width="100%"
                   height="100%"
-                  src={course.video_url.replace('watch?v=', 'embed/')}                  allowFullScreen
+                  src={course.video_url.replace('watch?v=', 'embed/').replace('https://www.youtube.com/', 'https://www.youtube.com/embed/')}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
                   title={course.title}
                   data-testid="video-player"
                 ></iframe>
