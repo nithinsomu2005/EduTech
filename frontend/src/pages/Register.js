@@ -22,11 +22,30 @@ const Register = () => {
     mobile: '',
     password: '',
     confirmPassword: '',
-    role: 'student'
+    role: 'student',
+    grade: '',
+    stream: ''
   });
 
+  const gradeOptions = [
+    { value: 'KG', label: 'Kindergarten' },
+    { value: '1-5', label: 'Grade 1-5' },
+    { value: '6-10', label: 'Grade 6-10' },
+    { value: 'Inter', label: 'Intermediate (11-12)' },
+    { value: 'BTech', label: 'BTech/Engineering' }
+  ];
+
+  const streamOptions = {
+    'Inter': ['MPC', 'BiPC', 'CEC', 'HEC'],
+    'BTech': ['CSE', 'ECE', 'EEE', 'Mechanical', 'Civil']
+  };
+
   const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    if (field === 'grade') {
+      setFormData(prev => ({ ...prev, [field]: value, stream: '' }));
+    } else {
+      setFormData(prev => ({ ...prev, [field]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
