@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 import { BookOpen, Trophy, Target, TrendingUp, Play, LogOut, Award, Star, ArrowRight } from 'lucide-react';
@@ -9,6 +9,7 @@ import { Progress } from '../components/ui/progress';
 const StudentDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [stats, setStats] = useState(null);
   const [courses, setCourses] = useState([]);
   const [progress, setProgress] = useState([]);
@@ -17,7 +18,7 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     fetchDashboardData();
-  }, []);
+  }, [location.state?.refresh]);
 
   const fetchDashboardData = async () => {
     try {
