@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { BookOpen, Lock, User, AlertCircle } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -10,6 +10,7 @@ import { Alert, AlertDescription } from '../components/ui/alert';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login, loginParent } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -23,6 +24,15 @@ const Login = () => {
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [generatedOtp, setGeneratedOtp] = useState('');
+
+  useEffect(() => {
+    if (location.state?.institution_id) {
+      setCredentials(prev => ({
+        ...prev,
+        institution_id: location.state.institution_id
+      }));
+    }
+  }, [location]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
