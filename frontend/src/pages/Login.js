@@ -117,6 +117,14 @@ const Login = () => {
 
             <TabsContent value="student">
               <form onSubmit={handleLogin} className="space-y-4">
+                {location.state?.institution_id && (
+                  <Alert className="bg-green-50 border-green-200" data-testid="registration-success-alert">
+                    <AlertDescription className="text-green-800">
+                      ✅ Registration successful! Please enter your password to login.
+                    </AlertDescription>
+                  </Alert>
+                )}
+                
                 {error && (
                   <Alert variant="destructive" data-testid="login-error-alert">
                     <AlertCircle className="h-4 w-4" />
