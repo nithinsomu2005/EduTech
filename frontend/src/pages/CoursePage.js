@@ -75,7 +75,7 @@ const CoursePage = () => {
       });
       setQuizResult(result.data);
       setTimeout(() => {
-        navigate('/student/dashboard');
+        navigate('/student/dashboard', { replace: true, state: { refresh: true } });
       }, 3000);
     } catch (error) {
       console.error('Failed to submit quiz:', error);
