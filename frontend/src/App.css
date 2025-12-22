@@ -1,1 +1,7 @@
-.App {\n  min-height: 100vh;\n}\n\n* {\n  box-sizing: border-box;\n}\n
+.App {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
