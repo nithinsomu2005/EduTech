@@ -80,6 +80,10 @@ const StudentDashboard = () => {
                 <BookOpen className="w-4 h-4 mr-2" />
                 Courses
               </Button>
+              <Button variant="ghost" onClick={() => navigate('/student/resources')} data-testid="nav-resources-btn">
+                <BookOpen className="w-4 h-4 mr-2" />
+                Resources
+              </Button>
               <Button variant="ghost" onClick={() => navigate('/student/career')} data-testid="nav-career-btn">
                 <Target className="w-4 h-4 mr-2" />
                 Career
