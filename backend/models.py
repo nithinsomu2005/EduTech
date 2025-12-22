@@ -12,6 +12,8 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
+    grade: Optional[str] = None
+    stream: Optional[str] = None
 
 class User(UserBase):
     model_config = ConfigDict(extra="ignore")
