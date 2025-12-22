@@ -50,10 +50,12 @@ async def register(user_data: UserCreate):
     
     if user_data.role == "student":
         from models import Student
+        grade = user_data.grade or "BTech"
         student = Student(
             user_id=user.user_id,
-            grade="BTech",
+            grade=grade,
             grade_year=1,
+            stream=user_data.stream,
             parent_mobile=user_data.mobile,
             institution_name="Demo Institution"
         )
