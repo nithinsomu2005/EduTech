@@ -199,23 +199,3 @@ async def submit_quiz(submission: QuizSubmission, current_student: dict = Depend
         "total_questions": total_questions
     }
 
-@router.get("/stats")
-async def get_stats(current_student: dict = Depends(get_current_student)):
-    progress_list = await db.progress.find(
-        {"student_id": current_student["student_id"]},
-        {"_id": 0}
-    ).to_list(100)
-    
-    completed_courses = sum(1 for p in progress_list if p.get("quiz_completed"))
-    total_courses = await db.courses.count_documents({"standard": current_student["standard"]})
-    
-    return {
-        "name": current_student["name"],
-        "username": current_student["username"],
-        "standard": current_student["standard"],
-        "total_credits": current_student.get("total_credits", 0),
-        "level": current_student.get("level", 1),
-        "completed_courses": completed_courses,
-        "total_courses": total_courses,
-        "progress_percentage": int((completed_courses / total_courses * 100)) if total_courses > 0 else 0
-    }
