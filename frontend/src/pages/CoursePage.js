@@ -267,13 +267,17 @@ const CoursePage = () => {
               </Button>
               <Button
                 onClick={handleQuizSubmit}
-                disabled={submitting || Object.keys(answers).length !== quiz.questions.length}
+                disabled={submitting || !quiz?.questions || Object.keys(answers).length !== quiz.questions.length}
                 className="btn-hover"
                 data-testid="submit-quiz-btn"
               >
                 {submitting ? 'Submitting...' : 'Submit Quiz'}
               </Button>
             </div>
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
+            <p className="text-gray-600">Loading quiz...</p>
           </div>
         )}
       </div>
