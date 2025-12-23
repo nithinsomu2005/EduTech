@@ -13,7 +13,7 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-app = FastAPI(title="EduBridge V2 API", version="2.0.0")
+app = FastAPI(title="EduBridge API", version="2.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,15 +23,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from routers import auth_v2, courses_v2, parent_v2
+from routers import auth_new, courses_new, parent_new
 
-app.include_router(auth_v2.router, prefix="/api")
-app.include_router(courses_v2.router, prefix="/api")
-app.include_router(parent_v2.router, prefix="/api")
+app.include_router(auth_new.router, prefix="/api")
+app.include_router(courses_new.router, prefix="/api")
+app.include_router(parent_new.router, prefix="/api")
 
 @app.get("/api")
 async def root():
-    return {"message": "EduBridge V2 API", "version": "2.0.0", "status": "active"}
+    return {"message": "EduBridge API", "version": "2.0.0", "status": "active"}
 
 @app.get("/api/health")
 async def health_check():
@@ -45,7 +45,6 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
-logger = logging.getLogger(__name__)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
