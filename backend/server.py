@@ -23,11 +23,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from routers import auth_new, courses_new, parent_new
+from routers import auth_new, student_routes, parent_routes
 
 app.include_router(auth_new.router, prefix="/api")
-app.include_router(courses_new.router, prefix="/api")
-app.include_router(parent_new.router, prefix="/api")
+app.include_router(student_routes.router, prefix="/api")
+app.include_router(parent_routes.router, prefix="/api")
 
 @app.get("/api")
 async def root():
