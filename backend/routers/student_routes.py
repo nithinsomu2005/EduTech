@@ -58,7 +58,7 @@ async def start_course(course_id: str, current_student: dict = Depends(get_curre
     }
     
     await db.progress.insert_one(progress)
-    del progress["_id"] if "_id" in progress else None
+    progress.pop("_id", None)
     return {"message": "Course started", "progress": progress}
 
 
