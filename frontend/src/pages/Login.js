@@ -29,7 +29,7 @@ const Login = () => {
     if (location.state?.username) {
       setCredentials(prev => ({
         ...prev,
-        institution_id: location.state.username
+        username: location.state.username
       }));
     }
   }, [location]);
