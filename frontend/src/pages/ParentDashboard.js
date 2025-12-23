@@ -145,6 +145,32 @@ const ParentDashboard = () => {
             <div className="lg:col-span-2">
               {selectedChild && childProgress && (
                 <div className="space-y-6">
+                  <div className="bg-white rounded-xl shadow-sm p-6" data-testid="child-info-card">
+                    <h3 className="text-xl font-bold mb-4">Student Information</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-600 font-medium">Name:</span>
+                        <span className="font-semibold text-gray-800">{childProgress.student.name}</span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-600 font-medium">Username:</span>
+                        <span className="font-semibold text-gray-800">{childProgress.student.username}</span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-600 font-medium">Class:</span>
+                        <span className="font-semibold text-gray-800">{childProgress.student.standard}</span>
+                      </div>
+                      <div className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-600 font-medium">Total Credits:</span>
+                        <span className="font-semibold text-[hsl(var(--primary))]">{childProgress.student.total_credits}</span>
+                      </div>
+                      <div className="flex justify-between py-2">
+                        <span className="text-gray-600 font-medium">Level:</span>
+                        <span className="font-semibold text-purple-600">Level {childProgress.student.level}</span>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="grid md:grid-cols-3 gap-4">
                     <div className="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl p-6 text-white" data-testid="child-stats-credits">
                       <Trophy className="w-8 h-8 mb-3" />
