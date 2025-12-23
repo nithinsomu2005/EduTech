@@ -13,7 +13,7 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-app = FastAPI(title="EduBridge V2 API", version="2.0.0")
+app = FastAPI(title="EduBridge API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,15 +23,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from routers import auth_v2, courses_v2, parent_v2
+from routers import auth, courses, progress, rewards, career, parent, resources, leaderboard, teacher
 
-app.include_router(auth_v2.router, prefix="/api")
-app.include_router(courses_v2.router, prefix="/api")
-app.include_router(parent_v2.router, prefix="/api")
+app.include_router(auth.router, prefix="/api")
+app.include_router(courses.router, prefix="/api")
+app.include_router(progress.router, prefix="/api")
+app.include_router(rewards.router, prefix="/api")
+app.include_router(career.router, prefix="/api")
+app.include_router(parent.router, prefix="/api")
+app.include_router(teacher.router, prefix="/api")
+app.include_router(resources.router, prefix="/api")
+app.include_router(leaderboard.router, prefix="/api")
 
 @app.get("/api")
 async def root():
-    return {"message": "EduBridge V2 API", "version": "2.0.0", "status": "active"}
+    return {"message": "EduBridge API v1.0", "status": "active"}
 
 @app.get("/api/health")
 async def health_check():
