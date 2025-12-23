@@ -194,7 +194,19 @@ const CoursePage = () => {
                     </Button>
                   )}
                   {videoCompleted && !courseProgress?.quiz_passed && (
-                    <Button onClick={() => setShowQuiz(true)} className="btn-hover" data-testid="take-quiz-btn">
+                    <Button onClick={async () => {
+                      if (!quiz) {
+                        try {
+                          const quizRes = await api.get(`/courses/${courseId}/quiz`);
+                          setQuiz(quizRes.data);
+                        } catch (error) {
+                          console.error('Failed to fetch quiz:', error);
+                          alert('Failed to load quiz. Please try again.');
+                          return;
+                        }
+                      }
+                      setShowQuiz(true);
+                    }} className="btn-hover" data-testid="take-quiz-btn">
                       <Play className="w-4 h-4 mr-2" />
                       Take Quiz
                     </Button>
