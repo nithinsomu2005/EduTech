@@ -56,6 +56,13 @@ const CoursePage = () => {
     try {
       await api.put(`/progress/video-complete?course_id=${courseId}&watch_duration=${course.duration_minutes}`);
       setVideoCompleted(true);
+      // Fetch quiz after video is complete
+      try {
+        const quizRes = await api.get(`/courses/${courseId}/quiz`);
+        setQuiz(quizRes.data);
+      } catch (quizError) {
+        console.error('Failed to fetch quiz:', quizError);
+      }
       alert('Video completed! Quiz unlocked!');
     } catch (error) {
       console.error('Failed to mark video complete:', error);
