@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { BookOpen, User, Mail, Phone, Lock, Building, AlertCircle, CheckCircle } from 'lucide-react';
+import { BookOpen, User, Mail, Phone, Lock, AlertCircle, CheckCircle } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -16,36 +16,18 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
   
   const [formData, setFormData] = useState({
-    institution_id: '',
-    email: '',
-    full_name: '',
+    name: '',
+    username: '',
     mobile: '',
     password: '',
     confirmPassword: '',
-    role: 'student',
-    grade: '',
-    stream: ''
+    standard: ''
   });
 
-  const gradeOptions = [
-    { value: 'KG', label: 'Kindergarten' },
-    { value: '1-5', label: 'Grade 1-5' },
-    { value: '6-10', label: 'Grade 6-10' },
-    { value: 'Inter', label: 'Intermediate (11-12)' },
-    { value: 'BTech', label: 'BTech/Engineering' }
-  ];
-
-  const streamOptions = {
-    'Inter': ['MPC', 'BiPC', 'CEC', 'HEC'],
-    'BTech': ['CSE', 'ECE', 'EEE', 'Mechanical', 'Civil']
-  };
+  const standards = ['KG', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'BTECH'];
 
   const handleChange = (field, value) => {
-    if (field === 'grade') {
-      setFormData(prev => ({ ...prev, [field]: value, stream: '' }));
-    } else {
-      setFormData(prev => ({ ...prev, [field]: value }));
-    }
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -58,7 +40,7 @@ const Register = () => {
     }
     
     if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
+      setError('Password must be at least 6 characters');
       return;
     }
     
@@ -69,10 +51,10 @@ const Register = () => {
       await register(dataToSend);
       setSuccess(true);
       setTimeout(() => {
-        navigate('/login', { state: { institution_id: formData.institution_id } });
+        navigate('/login', { state: { username: formData.username } });
       }, 2000);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Registration failed. Please try again.');
+      setError(err.response?.data?.detail || 'Registration failed');
     } finally {
       setLoading(false);
     }
@@ -87,21 +69,21 @@ const Register = () => {
             <span className="text-3xl font-bold gradient-text">EduBridge</span>
           </div>
           <h1 className="text-2xl font-bold">Create Your Account</h1>
-          <p className="text-gray-600 mt-2">Join thousands of learners on EduBridge</p>
+          <p className="text-gray-600 mt-2">Join the learning platform</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-8" data-testid="register-form-container">
-          {success ? (
-            <Alert className="bg-green-50 border-green-200 mb-6" data-testid="success-alert">
+          {success && (
+            <Alert className="bg-green-50 border-green-200 mb-6">
               <CheckCircle className="h-5 w-5 text-green-600" />
               <AlertDescription className="text-green-800 ml-2">
                 Registration successful! Redirecting to login...
               </AlertDescription>
             </Alert>
-          ) : null}
+          )}
 
           {error && (
-            <Alert variant="destructive" className="mb-6" data-testid="error-alert">
+            <Alert variant="destructive" className="mb-6">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>{error}</AlertDescription>
             </Alert>
@@ -110,34 +92,32 @@ const Register = () => {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="full_name">Full Name</Label>
+                <Label htmlFor="name">Full Name</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                   <Input
-                    id="full_name"
-                    data-testid="full-name-input"
+                    id="name"
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Enter your name"
                     className="pl-10"
-                    value={formData.full_name}
-                    onChange={(e) => handleChange('full_name', e.target.value)}
+                    value={formData.name}
+                    onChange={(e) => handleChange('name', e.target.value)}
                     required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="username">Username</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                  <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                   <Input
-                    id="email"
-                    data-testid="email-input"
-                    type="email"
-                    placeholder="john@example.com"
+                    id="username"
+                    type="text"
+                    placeholder="Choose username"
                     className="pl-10"
-                    value={formData.email}
-                    onChange={(e) => handleChange('email', e.target.value)}
+                    value={formData.username}
+                    onChange={(e) => handleChange('username', e.target.value)}
                     required
                   />
                 </div>
@@ -146,31 +126,13 @@ const Register = () => {
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="institution_id">Institution ID</Label>
-                <div className="relative">
-                  <Building className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                  <Input
-                    id="institution_id"
-                    data-testid="institution-id-input"
-                    type="text"
-                    placeholder="INST001"
-                    className="pl-10"
-                    value={formData.institution_id}
-                    onChange={(e) => handleChange('institution_id', e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
                 <Label htmlFor="mobile">Mobile Number</Label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                   <Input
                     id="mobile"
-                    data-testid="mobile-input"
                     type="tel"
-                    placeholder="9876543210"
+                    placeholder="10-digit mobile"
                     className="pl-10"
                     value={formData.mobile}
                     onChange={(e) => handleChange('mobile', e.target.value)}
@@ -178,55 +140,21 @@ const Register = () => {
                   />
                 </div>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="role">I am a</Label>
-              <Select value={formData.role} onValueChange={(value) => handleChange('role', value)}>
-                <SelectTrigger data-testid="role-select">
-                  <SelectValue placeholder="Select your role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="student">Student</SelectItem>
-                  <SelectItem value="teacher">Teacher</SelectItem>
-                  <SelectItem value="admin">Admin</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {formData.role === 'student' && (
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="grade">Grade/Standard</Label>
-                  <Select value={formData.grade} onValueChange={(value) => handleChange('grade', value)}>
-                    <SelectTrigger data-testid="grade-select">
-                      <SelectValue placeholder="Select your grade" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {gradeOptions.map(opt => (
-                        <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {(formData.grade === 'Inter' || formData.grade === 'BTech') && (
-                  <div className="space-y-2">
-                    <Label htmlFor="stream">Stream/Branch</Label>
-                    <Select value={formData.stream} onValueChange={(value) => handleChange('stream', value)}>
-                      <SelectTrigger data-testid="stream-select">
-                        <SelectValue placeholder="Select stream" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {streamOptions[formData.grade]?.map(stream => (
-                          <SelectItem key={stream} value={stream}>{stream}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                )}
+              <div className="space-y-2">
+                <Label htmlFor="standard">Class/Standard</Label>
+                <Select value={formData.standard} onValueChange={(value) => handleChange('standard', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select class" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {standards.map(std => (
+                      <SelectItem key={std} value={std}>Class {std}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
-            )}
+            </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -235,7 +163,6 @@ const Register = () => {
                   <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                   <Input
                     id="password"
-                    data-testid="password-input"
                     type="password"
                     placeholder="Min. 6 characters"
                     className="pl-10"
@@ -252,7 +179,6 @@ const Register = () => {
                   <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                   <Input
                     id="confirmPassword"
-                    data-testid="confirm-password-input"
                     type="password"
                     placeholder="Re-enter password"
                     className="pl-10"
@@ -264,7 +190,7 @@ const Register = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full btn-hover" disabled={loading} data-testid="register-submit-btn">
+            <Button type="submit" className="w-full btn-hover" disabled={loading}>
               {loading ? 'Creating Account...' : 'Create Account'}
             </Button>
           </form>
@@ -272,7 +198,7 @@ const Register = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
-              <Link to="/login" className="text-[hsl(var(--primary))] font-semibold hover:underline" data-testid="login-link">
+              <Link to="/login" className="text-[hsl(var(--primary))] font-semibold hover:underline">
                 Sign in here
               </Link>
             </p>
