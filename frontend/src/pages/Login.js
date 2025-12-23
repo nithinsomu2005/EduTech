@@ -117,30 +117,30 @@ const Login = () => {
 
             <TabsContent value="student">
               <form onSubmit={handleLogin} className="space-y-4">
-                {location.state?.institution_id && (
-                  <Alert className="bg-green-50 border-green-200" data-testid="registration-success-alert">
+                {location.state?.username && (
+                  <Alert className="bg-green-50 border-green-200">
                     <AlertDescription className="text-green-800">
-                      ✅ Registration successful! Please enter your password to login.
+                      ✅ Registration successful! Please login with your username.
                     </AlertDescription>
                   </Alert>
                 )}
                 
                 {error && (
-                  <Alert variant="destructive" data-testid="login-error-alert">
+                  <Alert variant="destructive">
                     <AlertCircle className="h-4 w-4" />
                     <AlertDescription>{error}</AlertDescription>
                   </Alert>
                 )}
                 
                 <div className="space-y-2">
-                  <Label htmlFor="institution_id">Institution ID</Label>
+                  <Label htmlFor="username">Username</Label>
                   <div className="relative">
                     <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                     <Input
-                      id="institution_id"
-                      data-testid="institution-id-input"
+                      id="username"
+                      data-testid="username-input"
                       type="text"
-                      placeholder="Enter your institution ID"
+                      placeholder="Enter your username"
                       className="pl-10"
                       value={credentials.institution_id}
                       onChange={(e) => setCredentials({...credentials, institution_id: e.target.value})}
