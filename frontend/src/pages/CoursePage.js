@@ -218,18 +218,18 @@ const CoursePage = () => {
               </div>
             </div>
           </div>
-        ) : (
+        ) : quiz ? (
           <div className="bg-white rounded-2xl shadow-lg p-8 fade-in" data-testid="quiz-section">
             <div className="mb-8">
-              <h2 className="text-3xl font-bold mb-2">{quiz.title}</h2>
+              <h2 className="text-3xl font-bold mb-2">{quiz.title || 'Quiz'}</h2>
               <p className="text-gray-600">Answer all questions to earn {course.credits} credits</p>
               <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                <p className="text-sm font-semibold">Passing Marks: {quiz.passing_marks}/{quiz.total_marks}</p>
+                <p className="text-sm font-semibold">Passing Score: {quiz.passing_score || 60}%</p>
               </div>
             </div>
 
             <div className="space-y-8">
-              {quiz.questions.map((q, index) => (
+              {quiz.questions && quiz.questions.map((q, index) => (
                 <div key={index} className="border-b border-gray-200 pb-6" data-testid={`question-${index}`}>
                   <p className="font-semibold text-lg mb-4">
                     {index + 1}. {q.question}
