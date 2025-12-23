@@ -142,8 +142,8 @@ const Login = () => {
                       type="text"
                       placeholder="Enter your username"
                       className="pl-10"
-                      value={credentials.institution_id}
-                      onChange={(e) => setCredentials({...credentials, institution_id: e.target.value})}
+                      value={credentials.username}
+                      onChange={(e) => setCredentials({...credentials, username: e.target.value})}
                       required
                     />
                   </div>
