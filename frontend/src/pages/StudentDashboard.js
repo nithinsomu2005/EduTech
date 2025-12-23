@@ -100,8 +100,11 @@ const StudentDashboard = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 fade-in" data-testid="welcome-section">
-          <h1 className="text-4xl font-bold mb-2">Welcome back, {user?.full_name}! 🎉</h1>
-          <p className="text-gray-600 text-lg">Continue your learning journey</p>
+          <h1 className="text-4xl font-bold mb-2">Welcome, {user?.name}! 👋</h1>
+          <div className="flex items-center space-x-6 text-lg">
+            <span className="text-gray-600">Class: <span className="font-semibold text-gray-800">{user?.standard}</span></span>
+            <span className="text-gray-600">Username: <span className="font-semibold text-gray-800">{user?.username}</span></span>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-4 gap-6 mb-8">
