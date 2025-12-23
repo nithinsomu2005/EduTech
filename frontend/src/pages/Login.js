@@ -16,7 +16,7 @@ const Login = () => {
   const [error, setError] = useState('');
   
   const [credentials, setCredentials] = useState({
-    institution_id: '',
+    username: '',
     password: ''
   });
   
