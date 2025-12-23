@@ -26,10 +26,10 @@ const Login = () => {
   const [generatedOtp, setGeneratedOtp] = useState('');
 
   useEffect(() => {
-    if (location.state?.institution_id) {
+    if (location.state?.username) {
       setCredentials(prev => ({
         ...prev,
-        institution_id: location.state.institution_id
+        institution_id: location.state.username
       }));
     }
   }, [location]);
